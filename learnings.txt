@@ -1,0 +1,1 @@
+npm ejs - we are using server side rendering
