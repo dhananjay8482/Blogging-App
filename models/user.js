@@ -45,7 +45,6 @@ userSchema.pre("save", function(next){
 // virtual function to check hashed passowrd and user main passsword
 userSchema.static("matchPassword", async function(email, password){
     const user = await this.findOne({email});
-    console.log('insided match ', user)
     if(!user) throw new Error('User not found!');
     
     const salt = user.salt;
