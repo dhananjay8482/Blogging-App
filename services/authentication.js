@@ -1,5 +1,6 @@
 const JWT = require("jsonwebtoken");
 
+//Todo : KEEP THIS TOKEN SAFE IN .env FILE
 const secret = "$upeRMan@123";
 
 function createTokenForUser(user){
