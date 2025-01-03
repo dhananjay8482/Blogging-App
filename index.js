@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const userRoute = require('./routes/user');
 const mongoose = require('mongoose');
+const { checkForAuthenticationCookie } = require('./middlewares/authentication');
 
 const app = express();
 const PORT = 8000;
@@ -16,9 +18,13 @@ app.set('views', path.resolve("./views"));
 
 // middlleware to get form data values from FE
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"))
 
 app.get('/', (req, res)=>{
-    res.render('home');
+    res.render('home', {
+        user: req.user
+    });
 })
 
 app.use('/user', userRoute)
